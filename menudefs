@@ -1,0 +1,136 @@
+MENU MAIN
+TEXT ~ StormWood ~
+TEXT Select A Design
+TEXT    
+TOMENU GET_COLOUR Designs
+TOMENU GET_OPTIONS Options
+
+MENU GET_COLOUR
+TEXT ~ StormoWood ~
+TEXT    
+TOMENU C_RED Red 
+TOMENU C_GOLD Gold
+TOMENU MAIN Main
+TOMENU C_GREEN Green
+TOMENU C_BLUE Blue
+TOMENU C_VIOLET Violet
+TOMENU C_BROWN Brown
+TOMENU C_BLACK Black
+TOMENU C_WHITE White
+
+MENU C_RED
+TEXT ~ StormWood ~
+TEXT ** Red **
+OPTION Lion_Red:C_RED
+OPTION Horse_Red:C_RED
+TOMENU GET_COLOUR Back
+OPTION Dragon_Red:C_RED
+OPTION Panther_Red:C_RED
+OPTION Gryphon_Red:C_RED
+OPTION Stag_Red:C_RED
+OPTION Pheonix_Red:C_RED
+OPTION Eagle_Red:C_RED
+
+MENU C_GOLD
+TEXT ~ StormWood ~
+TEXT ** Gold **
+OPTION Lion_Gold:C_GOLD
+OPTION Horse_Gold:C_GOLD
+TOMENU GET_COLOUR Back
+OPTION Dragon_Gold:C_GOLD
+OPTION Panther_Gold:C_GOLD
+OPTION Gryphon_Gold:C_GOLD
+OPTION Stag_Gold:C_GOLD
+OPTION Pheonix_Gold:C_GOLD
+OPTION Eagle_Gold:C_GOLD
+
+MENU C_GREEN
+TEXT ~ StormWood ~
+TEXT ** Green **
+OPTION Lion_Green:C_GREEN
+OPTION Horse_Green:C_GREEN
+TOMENU GET_COLOUR Back
+OPTION Dragon_Green:C_GREEN
+OPTION Panther_Green:C_GREEN
+OPTION Gryphon_Green:C_GREEN
+OPTION Stag_Green:C_GREEN
+OPTION Pheonix_Green:C_GREEN
+OPTION Eagle_Green:C_GREEN
+
+MENU C_BLUE
+TEXT ~ StormWood ~
+TEXT ** Blue **
+OPTION Lion_Blue:C_BLUE
+OPTION Horse_Blue:C_BLUE
+TOMENU GET_COLOUR Back
+OPTION Dragon_Blue:C_BLUE
+OPTION Panther_Blue:C_BLUE
+OPTION Gryphon_Blue:C_BLUE
+OPTION Stag_Blue:C_BLUE
+OPTION Pheonix_Blue:C_BLUE
+OPTION Eagle_Blue:C_BLUE
+
+MENU C_VIOLET
+TEXT ~ StormWood ~
+TEXT ** Violet **
+OPTION Lion_Violet:C_VIOLET
+OPTION Horse_Violet:C_VIOLET
+TOMENU GET_COLOUR Back
+OPTION Dragon_Violet:C_VIOLET
+OPTION Panther_Violet:C_VIOLET
+OPTION Gryphon_Violet:C_VIOLET
+OPTION Stag_Violet:C_VIOLET
+OPTION Pheonix_Violet:C_VIOLET
+OPTION Eagle_Violet:C_VIOLET
+
+MENU C_BROWN
+TEXT ~ StormWood ~
+TEXT ** Brown **
+OPTION Lion_Brown:C_BROWN
+OPTION Horse_Brown:C_BROWN
+TOMENU GET_COLOUR Back
+OPTION Dragon_Brown:C_BROWN
+OPTION Panther_Brown:C_BROWN
+OPTION Gryphon_Brown:C_BROWN
+OPTION Stag_Brown:C_BROWN
+OPTION Pheonix_Brown:C_BROWN
+OPTION Eagle_Brown:C_BROWN
+
+MENU C_BLACK
+TEXT ~ StormWood ~
+TEXT ** Black **
+OPTION Lion_Black:C_BLACK
+OPTION Horse_Black:C_BLACK
+TOMENU GET_COLOUR Back
+OPTION Dragon_Black:C_BLACK
+OPTION Panther_Black:C_BLACK
+OPTION Gryphon_Black:C_BLACK
+OPTION Stag_Black:C_BLACK
+OPTION Pheonix_Black:C_BLACK
+OPTION Eagle_Black:C_BLACK
+
+MENU C_WHITE
+TEXT ~ StormWood ~
+TEXT ** White **
+OPTION Lion_White:C_WHITE
+OPTION Horse_White:C_WHITE
+TOMENU GET_COLOUR Back
+OPTION Dragon_White:C_WHITE
+OPTION Panther_White:C_WHITE
+OPTION Gryphon_White:C_WHITE
+OPTION Stag_White:C_WHITE
+OPTION Pheonix_White:C_WHITE
+OPTION Eagle_White:C_WHITE
+
+MENU GET_OPTIONS
+TEXT ~ StormWood ~
+TEXT     
+TEXT     
+TOMENU DEL_CONFIRM Delete Script
+TOMENU MAIN Main
+
+MENU DEL_CONFIRM
+TEXT ~ StormWood ~
+TOMENU GET_OPTIONS No
+OPTION Yes
+TOMENU MAIN Main

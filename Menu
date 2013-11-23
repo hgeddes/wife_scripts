@@ -1,0 +1,144 @@
+// menu control script 1.0
+// by Henrik Lorgsval
+// helped greatly by scripts by Zonax Delorean
+// License: BSD, but please provide patches/bugfixes if you can!
+
+//--- Menu library interface start-------------
+integer LM_OPTIONDATA = 10002;
+
+doMenu( key user, string menuname ) {
+    llMessageLinked( LINK_THIS, 10001, menuname, user ); // 10001: LM_DOMENU
+}
+//---Menu Library inteface end----------
+
+// ---Debug helpers---------------------
+integer debug = FALSE;
+
+debugSay( string st ) {
+    if( debug ) llSay( 0, "***"+st+"***" );
+}
+// ---Debug Helpers end------------------
+
+// types array is the list of values corresponding to the OPTIONS given
+// in the menudefs.
+list types = [
+    "Lion_Red", "Lion_Gold", "Lion_Green", "Lion_Blue", "Lion_Violet", "Lion_Brown", "Lion_Black", "Lion_White", 
+    "Horse_Red", "Horse_Gold", "Horse_Green", "Horse_Blue", "Horse_Violet", "Horse_Brown", "Horse_Black", "Horse_White", 
+    "Dragon_Red", "Dragon_Gold", "Dragon_Green", "Dragon_Blue", "Dragon_Violet", "Dragon_Brown", "Dragon_Black", "Dragon_White", 
+    "Panther_Red", "Panther_Gold", "Panther_Green", "Panther_Blue", "Panther_Violet", "Panther_Brown", "Panther_Black", "Panther_White", 
+    "Gryphon_Red", "Gryphon_Gold", "Gryphon_Green", "Gryphon_Blue", "Gryphon_Violet", "Gryphon_Brown", "Gryphon_Black", "Gryphon_White", 
+    "Stag_Red", "Stag_Gold", "Stag_Green", "Stag_Blue", "Stag_Violet", "Stag_Brown", "Stag_Black", "Stag_White", 
+    "Pheonix_Red", "Pheonix_Gold", "Pheonix_Green", "Pheonix_Blue", "Pheonix_Violet", "Pheonix_Brown", "Pheonix_Black", "Pheonix_White", 
+    "Eagle_Red", "Eagle_Gold", "Eagle_Green", "Eagle_Blue", "Eagle_Violet", "Eagle_Brown", "Eagle_Black", "Eagle_White"
+];
+// The index of each texture should mathc its key in types.
+list textures = [
+    "a0d45275-13b1-7057-c2ea-9bc317ad076a",
+"2c1b2fe1-ae4a-eac4-31f3-dc548d057a9d",
+"2a814b2e-f1e8-b620-1183-901a4f5304fa",
+"b8825832-d67e-36b5-48cb-3c190f1ccdd9",
+"4de0b6c8-6b80-3e22-8ae7-38119eb16706",
+"90ff8a1f-b2a8-14f0-bfbf-eceb0c36367d",
+"f078c73a-79b4-7a45-80c3-d9de531b78be",
+"2bac04d6-0aec-32ca-c73c-5d9bf1cf0f8c",
+"f18c760f-004f-8db6-5647-0c785e2dd2ad",
+"0f400ba6-82a3-1aea-5142-5465efa016da",
+"e05dbc63-e35d-a313-f7f3-e5c210ff823a",
+"86fa17fa-f23f-9107-a3fe-0a070f96bf00",
+"f8dcc45e-98eb-6333-929d-a0ab6c1e6c10",
+"0091e5b8-e4e6-6017-1402-9343c1473d60",
+"4b993036-0059-cc44-e281-036eba8c7548",
+"376b7d7f-4d7c-3fd5-b1aa-2d387cb0a757",
+"1730e397-31e6-d051-42a2-30fcb6b15dee",
+"b6f38e8a-b470-4f20-bb4f-4234c41d45a9",
+"8246910e-cba4-ce3f-5c44-9ba55dd59bb0",
+"c5d64bfd-dab9-7d8b-7e8a-d701050c56e6",
+"4d1a73c6-1d0b-18ca-c63d-4c9aa67a5653",
+"427095b2-667e-97af-2f37-3b10c2c8ec9e",
+"9fe13888-8e07-30f6-a177-25cefe92698f",
+"bb76a049-e547-5859-32f5-a01313bedf57",
+"38fa2766-2b49-204b-d64d-a05b7feae947",
+"c34ab192-0315-579a-c1e0-8c3e3712a70b",
+"92446df8-b8f8-afba-ae4b-81678323fcad",
+"bc0e5252-8687-177b-e851-ac929968bb61",
+"0c848da5-4960-da89-c9d9-21ddba3197a5",
+"47e30f67-6056-521f-a7ac-2419f6689569",
+"f5381a8f-a837-5458-7f52-e82da67721bc",
+"1ea9ae02-42c4-de89-944d-51cb5bd715f6",
+"a118dd51-f0c0-dc5e-0eaa-0d5759a86d86",
+"03514e99-616f-eb80-cd25-56150ef5f60d",
+"7950d63f-02b1-d637-425c-5b3bd778f488",
+"836939fe-60cf-33f4-427e-7e3dcc60ab63",
+"464b0024-8fdb-984a-9f8f-b6c1244ee73a",
+"88eb8d17-037a-4e65-f86c-71cc894ef75f",
+"40eaabad-8f20-48a5-591f-509c8d9da517",
+"df374741-665c-0db0-7b69-e12a865ea9aa",
+"3aa541df-44e1-a34b-a077-8b1dc0b2545e",
+"3c52eca7-d166-0225-1b3a-02e41382ab4e",
+"7715d21f-e4ec-61c5-d216-b57e4de40c0c",
+"52c2c52a-3bcd-95d4-0e10-34f9d5ef757c",
+"e3a2e469-3b80-adec-3d57-f1a5541d1071",
+"3c015c8a-3c6c-eb25-03bc-ea13e73b6d25",
+"81baaaea-b2dd-9212-b255-5c63ffc058ac",
+"f2ef867f-f234-488c-0fab-063bb8d2ac13",
+"9a26d296-fe40-0c13-09a2-2429762d1e8e",
+"d0efe8a7-0c7b-86f3-d397-1cb608905c7b",
+"1e9d6356-da24-2b15-e781-a82777516ce0",
+"042df571-55fd-6fd0-667d-a8825c4d321d",
+"99239405-d00b-3b12-8124-209d0e12679a",
+"f35ac46d-35c4-35cd-28c3-2a684a9a941b",
+"68c6b2d3-6ada-5dba-0eba-d0a6077375c4",
+"6cad7daf-452e-4a72-a81a-965022126318",
+"551f2e74-bc4e-a3c9-0f13-c8b8001d7873",
+"ca3dcc16-c502-00d8-f5e8-b88f179af68d",
+"9f87d53c-8758-55fa-b375-07eec92fcb5e",
+"d2c1d4ed-f1df-0831-32c1-e1a58f9ec6c6",
+"d2a2e839-875b-5cf1-07df-c8566184d803",
+"4a4a0489-87de-1ca4-6399-4aae71ae98cd",
+"bc9a5dfd-5ceb-82b5-b351-e40c9aaaa666",
+"13374e6c-1772-d6c0-29ec-2c3a65ebdf77"
+];
+
+doAction( integer index ) {
+    if( debug ) debugSay( "Setting Banner To: "+(string)index );
+    llSetLinkPrimitiveParamsFast( 2, [ PRIM_TEXTURE, 3, llList2String( textures, index ), <1,1,1>, <0,0,0>, 0.0 ] );
+}
+
+stopScript() {
+    if( debug ) debugSay( "Stopping Script" );
+    llSetScriptState( "MenuEngine", FALSE );
+    llSetScriptState( llGetScriptName(), FALSE );
+}
+
+string getResponse( string str ) {
+    if( debug ) debugSay( "Getting Response From: "+str );
+    integer wpos = llSubStringIndex( str, "|" );
+    return llGetSubString( str, wpos+1,-1 );
+}
+
+default
+{
+    state_entry()
+    {
+        if( debug ) debugSay( "Starting Script" );
+    }
+    
+    link_message( integer sender_num, integer num, string str, key id )
+    {
+        if( debug ) debugSay( "link: "+(string)sender_num+":"+(string)num+":"+str+":"+(string)id );
+        if ( num == LM_OPTIONDATA ) {
+            string index = getResponse( str );
+            if( debug ) debugSay( "Routing On: |"+index+"|" );
+            if ( "Yes" == index ) {
+                stopScript();
+            } else {
+                doAction( llListFindList( types, [index] ) );
+            }
+        }
+    }
+
+    touch_start( integer total_number )
+    {
+        doMenu( llDetectedKey(0),"MAIN" );
+    }
+}
